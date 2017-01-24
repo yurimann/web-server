@@ -13,8 +13,22 @@ loop do                                             # Server runs forever
   while (line = client.gets) && !line.chomp.empty?  # Read the request and collect it until it's empty
     lines << line.chomp
   end
-  puts lines                                        # Output the full request to stdout
+  response = "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>My first web server</title>
+      </head>
+      <body>
+        <h1>My first web server</h1>
+        <p>Oh hey, this is my first HTML response!</p>
+      </body>
+  </html>"
 
-  client.puts(Time.now.ctime)                       # Output the current time to the client
+  client.puts(response)
+
+  # puts lines                                        # Output the full request to stdout
+  #
+  # client.puts(Time.now.ctime)                       # Output the current time to the client
   client.close                                      # Disconnect from the client
 end
